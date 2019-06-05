@@ -1,0 +1,20 @@
+spring:
+  kafka:
+    bootstrap-servers: 192.168.1.138:9092,192.168.1.138:9093
+    producer:
+      retries: 3
+      batch-size: 16384
+      buffer-memory: 33554432
+    consumer:
+      group-id: search
+      auto-offset-reset: earliest
+      max-poll-records: 1000
+      auto-commit-interval: 1000
+      enable-auto-commit: true
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@192.168.1.190:1521:dev
+    username: platform_portal_service
+    password: kingstar

@@ -1,0 +1,26 @@
+server:
+  port: ${SERVER_PORT:20004}
+  tomcat:
+    accesslog:
+      buffered: ${SERVER_LOG_BUFFERED:true}
+      enabled: ${SERVER_LOG_ENABLED:true}
+      directory: ${SERVER_LOG_DIR:log}
+      rotate: ${SERVER_LOG_ROTATE:true}
+      prefix: ${SERVER_LOG_PREFIX:news_log}
+      file-date-format: ${SERVER_LOG_DATE_FORMAT:.yyyy-MM-dd}
+      suffix: ${SERVER_LOG_SUFFIX:.log}
+spring:
+  exception:
+    restErrorResolver:
+      defaultExCode: 400
+      defaultExMsg: 未知原因，访问服务器出错
+      exceptionMappingDefinitions:
+        com.supwisdom.platform.core.framework.exception.SignificantRestException: _exmsg
+        com.supwisdom.platform.portal.api.exception.ValidateException: _exmsg
+        com.supwisdom.platform.core.framework.exception.RestException: 400, common.unknownException
+        com.supwisdom.platform.core.framework.exception.ManagerException: 400, common.unknownException
+        Throwable: 400
+    defaultMessageSource:
+      basename: classpath:exception/messages
+  profiles:
+    active: dev
